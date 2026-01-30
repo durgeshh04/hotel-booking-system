@@ -1,6 +1,5 @@
 import express from "express";
-import { configDotenv } from "dotenv";
-configDotenv({ quiet: true });
+import "dotenv/config"
 
 const app = express();
 
@@ -9,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Hello World...");
+  res.send("Server is running!");
 });
 
 app.listen(PORT, () => {
