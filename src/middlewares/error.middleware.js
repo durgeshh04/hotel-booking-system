@@ -1,23 +1,19 @@
+import { ZodError } from "zod";
+
 export const errorHandler = (err, req, res, next) => {
-  // fallback defaults
   let statusCode = err.statusCode || 500;
   let message = err.message || "Internal Server Error";
 
-  // Drizzle / Postgres errors (Neon)
-  if (err.code === "23505") {
-    statusCode = 409;
-    message = "Duplicate resource";
-  }
-
-  if (err.code === "22P02") {
-    statusCode = 400;
-    message = "Invalid input format";
-  }
-
   // Zod validation errors
-  if (err.name === "ZodError") {
+  if (err instanceof ZodError) {
     statusCode = 400;
     message = err.errors.map((e) => e.message).join(", ");
+  }
+
+  // Postgres unique constraint
+  if (err.code === "23505") {
+    statusCode = 409;
+    message = "Resource already exists";
   }
 
   // JWT errors
@@ -31,8 +27,8 @@ export const errorHandler = (err, req, res, next) => {
     message = "Token expired";
   }
 
-  // Log full error (only server-side)
-  console.error({
+  // Server-side log
+  console.error("ERROR 💥", {
     message: err.message,
     stack: err.stack,
     code: err.code,
@@ -40,6 +36,7 @@ export const errorHandler = (err, req, res, next) => {
 
   res.status(statusCode).json({
     success: false,
-    message,
+    data: null,
+    error: message,
   });
 };

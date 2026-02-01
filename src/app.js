@@ -15,13 +15,13 @@ app.use(
   }),
 );
 
-// error handling
-app.use(errorHandler);
-
 // routes
 app.get("/", (req, res) => {
   res.send("Server is running!");
 });
 routes(app);
+
+// error handling
+app.use(errorHandler);
 
 export default app;
