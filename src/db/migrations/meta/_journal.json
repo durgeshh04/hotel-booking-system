@@ -8,6 +8,20 @@
       "when": 1769890124624,
       "tag": "0000_thankful_the_twelve",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1769984660294,
+      "tag": "0001_bumpy_energizer",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1769984808650,
+      "tag": "0002_deep_mystique",
+      "breakpoints": true
     }
   ]
 }

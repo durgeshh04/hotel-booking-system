@@ -24,6 +24,6 @@ export const login = async (req, res, next) => {
 };
 
 export const me = asyncHandler(async (req, res) => {
-  const user = await authService.userData(req.id);
+  const user = await authService.userData(req.user.id);
   res.status(200).json({ success: true, data: user, error: null });
 });

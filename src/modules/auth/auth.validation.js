@@ -5,6 +5,7 @@ export const signupValidation = z.object({
   email: z.string().email(),
   password: z.string().min(6),
   phone: z.string().max(10),
+  role: z.enum(["customer", "admin", "owner"]).optional(),
 });
 
 export const loginValidation = z.object({

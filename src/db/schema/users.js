@@ -7,7 +7,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 // role enum:
-export const roleEnum = pgEnum("user_role", ["customer", "admin"]);
+export const roleEnum = pgEnum("user_role", ["customer", "admin", "owner"]);
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
